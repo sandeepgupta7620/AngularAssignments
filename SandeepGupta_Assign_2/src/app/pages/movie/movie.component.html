@@ -1,0 +1,57 @@
+<div class="bg-slate-300 w-[95%] flex-col justify-center items-center ml-8">
+  <mat-card *ngFor="let movie of filteredMovies" class="mb-0.5 px-[10%]">
+    <mat-card-content>
+      <div class="flex justify-center items-center mb-3">
+        <img 
+          width="100%" 
+          class="rounded-3xl mr-10 cursor-pointer" 
+          [src]="movie.Poster" 
+          alt="" 
+          (click)="expandImage(movie.Poster)"
+        />
+        <div class="w-[100%] pl-5">
+          <h3 class="font-bold text-2xl pb-2">{{ movie.Title }} ({{ movie.Year }})</h3>
+          <p class="pb-2">
+            <span class="text-gray-700 font-bold">{{ movie.Rated }}</span> |
+            <span class="text-gray-400">{{ movie.Runtime }} | {{ movie.Genre }}</span>
+          </p>
+          <p class="pb-2 text-gray-700">{{ movie.Plot }}</p>
+          <p class="pb-2"><span class="font-bold">Director : </span>{{ movie.Director }}</p>
+          <p class="pb-2"><span class="font-bold">Writer : </span>{{ movie.Writer }}</p>
+          <p class="pb-2"><span class="font-bold">Actors : </span>{{ movie.Actors }}</p>
+          <p class="pb-2"><span class="font-bold">Language : </span>{{ movie.Language }}</p>
+          <p class="pb-2"><span class="font-bold">Country : </span>{{ movie.Country }}</p>
+          <p class="pb-2"><span class="font-bold">Awards : </span>{{ movie.Awards }}</p>
+          <p class="pb-2"><span class="font-bold">Released : </span>{{ movie.Released }}</p>
+          <p class="pb-2"><span class="font-bold">IMDB Rating : </span>{{ movie.imdbRating }}</p>
+          <p class="pb-2"><span class="font-bold">MetaScore : </span>{{ movie.Metascore }}</p>
+        </div>
+      </div>
+      <h3 class="mb-3 text-gray-700">Movie Stills</h3>
+      <div class="flex gap-2 flex-wrap justify-start">
+        <img 
+          *ngFor="let image of movie.Images" 
+          width="32%" 
+          height="20%" 
+          class="rounded-xl object-cover cursor-pointer" 
+          [src]="image" 
+          alt="" 
+          (click)="expandImage(image)"
+        />
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+
+<div 
+  class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-75 z-50" 
+  *ngIf="expandedImage" 
+  (click)="closeImage()"
+>
+  <img 
+    class="max-w-4xl max-h-[80vh] rounded-xl object-contain" 
+    [src]="expandedImage" 
+    alt="Expanded Image"
+  />
+</div>
